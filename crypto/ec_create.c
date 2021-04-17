@@ -8,7 +8,7 @@ EC_KEY *ec_create(void)
     pointer = EC_KEY_new(EC_CURVE);
     if (!pointer) return NULL;
 
-    if (EC_KEY_gen_key(pointer) != 1)
+    if (EC_KEY_Kgen(pointer) != 1)
     {
         EC_KEY_free(pointer);
         return NULL;
