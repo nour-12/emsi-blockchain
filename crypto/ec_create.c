@@ -1,14 +1,16 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "hblk_crypto.h"
 EC_KEY *ec_create(void)
 {
-    EC_KEY * ec_key;
-    ec_key = EC_KEY_new_by_curve_name(EC_CURVE);
-    if (!ec_key)
+    EC_KEY * key;
+    key = EC_KEY_new_by_curve_name(EC_CURVE);
+    if (!key)
         return NULL;
-    if (!EC_KEY_generate_key(ec_key))
+    if (!EC_KEY_generate_key(key))
     {
-        EC_KEY_free(ec_key);
+        EC_KEY_free(key);
         return NULL;
     }
-    return ec_key;
+    return key;
 }
