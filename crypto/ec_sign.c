@@ -12,19 +12,14 @@
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
 		sig_t *sig)
 {
-	unsigned char hash[SHA256_DIGEST_LENGTH];
+	unsigned int len;
 
 	if(!key || !msg || !sig)
 		return (NULL);
-	if(!EC_KEY_check_key(key))
+	len = sig->len;
+	if(EDCSA_sign(0, msg, msglen, sig->sig, &len, 
+		        (EC_KEY *)key) != 1)
 		return (NULL);
-	if(!SHA256(msg, msglen, hash))
-		return (NULL);
-	sig->len = ECDSA_size(key);
-	if(!sig->len)
-		return (NULL);
-	if(!EDCSA_sign(EC_CURVE, hash, SHA256_DIGEST_LENGTH, sig->sig,
- (unsigned int *)&(sig->len), (EC_KEY *)key))
-		return (NULL);
+	sig->len = len;
 	return (sig->sig);
 }
