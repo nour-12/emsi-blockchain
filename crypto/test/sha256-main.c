@@ -39,6 +39,7 @@ int main(int ac, char **av)
       return (EXIT_FAILURE);
     }
 
+
   printf("\"%s\" hash is: ", av[1]);
   _print_hex_buffer(hash, SHA256_DIGEST_LENGTH);
   printf("\n");
