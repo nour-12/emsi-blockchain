@@ -10,20 +10,6 @@
  * Return: pointer to sig buffer or NULL
  */
 
-
-uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
-	size_t msglen, sig_t *sig)
-{
-if (!key || !msg)
-{
-return (NULL);
-}
-
-if (ECDSA_sign(0, msg, msglen, sig->sig,
-		(unsigned int *)&sig->len, (EC_KEY *)key)==0)
-{
-	return (NULL);
-
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg
 	, size_t msglen, sig_t *sig)
 {
@@ -39,9 +25,4 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg
 	}
 
 	return ((uint8_t *)sig->sig);
-
-}
-
-return ((unit8_t *)sig->sig);
-
 }
