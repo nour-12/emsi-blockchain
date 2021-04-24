@@ -16,28 +16,17 @@
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 	size_t msglen, sig_t *sig)
 {
-if (!key || !msg || !msglen)
-return (NULL);
-bzero(sig->sig, sizeof(sig->sig));
-sig->len = 0;
-if (!ECDSA_sign(0, msg, msglen, sig->sig,
-		(unsigned int *)&sig->len, (EC_KEY *)key))
-=======
-uint8_t *ec_sign(
-	EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t *sig)
->>>>>>> a3f42041e046fabe3c2950f5f7d1a3525f18f100
+if (!key || !msg)
 {
-	unsigned int len = 0;
+return (NULL);
+}
 
-	if (key && msg && msglen)
-	{
-		memset(sig->sig, 0, sizeof(sig->sig) / sizeof(*sig->sig));
-		if (ECDSA_sign(0, msg, msglen, sig->sig, &len, (EC_KEY *)key))
-		{
-			sig->len = len;
-			return (sig->sig);
-		}
-		sig->len = 0;
-	}
+if (ECDSA_sign(0, msg, msglen, sig->sig,
+		(unsigned int *)&sig->len, (EC_KEY *)key)==0)
+{
 	return (NULL);
+}
+
+return ((unit8_t *)sig->sig);
+
 }
