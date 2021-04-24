@@ -14,10 +14,8 @@
 #define PUB_FILENAME	"key_pub.pem"
 #define PRI_FILENAME	"key.pem"
 
-
 typedef struct sig_s
 {
-	
 	uint8_t		sig[SIG_MAX_LEN];
 	uint8_t		len;
 } sig_t;
