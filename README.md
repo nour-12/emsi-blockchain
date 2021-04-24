@@ -9,3 +9,4 @@ This project is created in order to explore the different sides of a blockchain:
 *How immutability is maintained in a Blockchain.
 *What is the Genesis Block, and why is it importan.
 *How to hash a Block, and what information is stored in the hash.
+*test
