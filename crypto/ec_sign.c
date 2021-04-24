@@ -20,10 +20,9 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
 	if(!SHA256(msg, msglen, hash))
 		return (NULL);
 	sig->len = ECDSA_size(key);
-	if(!sig-<len)
+	if(!sig->len)
 		return (NULL);
 	if(!EDCSA_sign(EC_CURVE, hash, SHA256_DIGEST_LENGTH, sig->sig, (unsigned int *)&(sig->len), (EC_KEY *)key))
 		return (NULL);
-
 	return (sig->sig);
 }
