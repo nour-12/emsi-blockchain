@@ -33,6 +33,7 @@ int main(int ac, char **av)
       fprintf(stderr, "sha256() failed\n");
       return (EXIT_FAILURE);
     }
+
   if (test_ptr != hash)
     {
       fprintf(stderr, "Return value and pointer differ\n");
