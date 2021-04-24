@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "hblk_crypto.h"
 
 /**
