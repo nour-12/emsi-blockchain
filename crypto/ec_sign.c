@@ -13,6 +13,7 @@
  *
  * Return: pointer to signature buffer on success, NULL on error
  */
+
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 	size_t msglen, sig_t *sig)
 {
