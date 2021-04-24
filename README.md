@@ -1,6 +1,6 @@
 # emsi-blockchain
 
-Readme file for Blockchain programs in C.
+Readme file of Blockchain projects -programs in C-.
 
 This project is created in order to explore the different sides of a blockchain:
 
