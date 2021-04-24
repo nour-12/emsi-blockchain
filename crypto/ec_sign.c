@@ -6,21 +6,24 @@
  * @msg: pointer to characters to be signed
  * @msglen: len of msg
  * @sig: address to store signature
- *
- * Retun: pointer to sig buffer or NULL
- *
  * Return: pointer to signature buffer on success, NULL on error
  */
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
 		sig_t *sig)
 {
-	unsigned int len;
+	unsigned char hash[SHA256_DIGEST_LENGTH];
 
-	if(!key || !sig | !msg)
+	if(!key || !msg || !sig)
 		return (NULL);
-	len = sig->len;
-	if(EDCSA_sign(0, msg, msglen, sig->, &len, (EC_KEY *)key != 1)
+	if(!EC_KEY_check_key(key))
 		return (NULL);
-	sig->len = len;
+	if(!SHA256(msg, msglen, hash))
+		return (NULL);
+	sig->len = ECDSA_size(key);
+	if(!sig-<len)
+		return (NULL);
+	if(!EDCSA_sign(EC_CURVE, hash, SHA256_DIGEST_LENGTH, sig->sig, (unsigned int *)&(sig->len), (EC_KEY *)key))
+		return (NULL);
+
 	return (sig->sig);
 }
