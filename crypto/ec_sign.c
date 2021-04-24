@@ -1,30 +1,29 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "hblk_crypto.h"
 
 /**
- * ec_sign - sign a set of bytes, using given private EC_KEY
- * @key: pointer to EC_KEY struct containing private key to perform the signing
- * @msg: pointer to characters to be signed
- * @msglen: len of msg
- * @sig: address to store signature
- *
- * Return: pointer to signature buffer on success, NULL on error
+ * it sign a given set of bytes using a given EC_KEY private key
+  * msglen: message length
+ * sig: holds the address at which to store the signature
+ * key: points to the EC_KEY structure containing the private key
+ * msg: points to the msglen characters to be signed
+ * Return a pointer to the signature buffer, or NULL upon failure
  */
-uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
-	size_t msglen, sig_t *sig)
+uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
+		 sig_t *sig)
 {
-if (!key || !msg || !msglen)
-return (NULL);
-bzero(sig->sig, sizeof(sig->sig));
-sig->len = 0;
-if (!ECDSA_sign(0, msg, msglen, sig->sig,
-		(unsigned int *)&sig->len, (EC_KEY *)key))
-{
-sig->len = 0;
-return (NULL);
-}
-return ((uint8_t *)sig->sig);
+	unsigned char hash[SHA256_DIGEST_LENGTH];
+
+	if (!key || !msg || !sig)
+		return (NULL);
+	if (!EC_KEY_check_key(key))
+		return (NULL);
+	if (!SHA256(msg, msglen, hash))
+		return (NULL);
+	sig->len = ECDSA_size(key);
+	if (!sig->len)
+		return (NULL);
+	if (!ECDSA_sign(EC_CURVE, hash, SHA256_DIGEST_LENGTH, sig->sig,
+			(unsigned int *)&(sig->len), (EC_KEY *)key))
+		return (NULL);
+	return (sig->sig);
 }
