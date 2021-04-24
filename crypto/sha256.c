@@ -1,3 +1,4 @@
+#include <openssl/ec.h>
 #include "hblk_crypto.h"
 
 /**
