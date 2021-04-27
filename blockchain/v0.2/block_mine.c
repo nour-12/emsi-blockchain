@@ -1,5 +1,9 @@
 #include "blockchain.h"
 
+/**
+ * block_mine - mines a block with requisite difficulty
+ * @block: pointer to block to mine
+ */
 void block_mine(block_t *block)
 {
 	uint64_t nonce = 0;
