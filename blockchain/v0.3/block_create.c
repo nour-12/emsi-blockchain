@@ -7,6 +7,7 @@
  * @data_len: length of data
  * Return: pointer to new block or NULL
  */
+
 block_t *block_create(block_t const *prev, int8_t const *data,
 	uint32_t data_len)
 {
