@@ -17,3 +17,4 @@ fclean: clean oclean
 
 libhblk_blockchain.a: blockchain.h transaction/transaction.h $(OBJ0)
 	ar rcs $(NAME0) $(OBJ0)
+	
