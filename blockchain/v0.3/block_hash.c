@@ -7,7 +7,6 @@
  * @arg: pointer to address to write to
  * Return: 0 if success else 1
  */
-
 int hash_tx_ids(llist_node_t node, unsigned int idx, void *arg)
 {
 	memcpy(*(uint8_t **)arg, ((transaction_t *)node)->id, SHA256_DIGEST_LENGTH);
