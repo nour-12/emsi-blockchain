@@ -13,6 +13,7 @@ clean:
 oclean:
 	$(RM) $(OBJ0)
 
+
 fclean: clean oclean
 
 libhblk_blockchain.a: blockchain.h transaction/transaction.h $(OBJ0)
