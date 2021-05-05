@@ -5,7 +5,6 @@ SRC0 = $(wildcard *.c) $(wildcard transaction/*.c) $(wildcard provided/*.c)
 OBJ0 = $(SRC0:.c=.o)
 NAME0 = libhblk_blockchain.a
 
-
 .PHONY: clean oclean flcean libhblk_blockchain.a
 
 clean:
@@ -17,5 +16,4 @@ oclean:
 fclean: clean oclean
 
 libhblk_blockchain.a: blockchain.h transaction/transaction.h $(OBJ0)
-	ar rcs $(NAME0) $(OBJ0)
-	
+	ar rcs $(NAME0) $(OBJ0)	
