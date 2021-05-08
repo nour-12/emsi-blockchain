@@ -1,4 +1,5 @@
 #include "transaction.h"
+#include <llist.h>
 
 /**
  * unspent_tx_out_create - creates unspent transaction struct
